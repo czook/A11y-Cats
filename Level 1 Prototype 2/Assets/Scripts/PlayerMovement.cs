@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     private void FixedUpdate()
@@ -33,13 +34,12 @@ public class PlayerMovement : MonoBehaviour
         transform.Translate(directionVector.normalized * Time.deltaTime * movementSpeed);
     }
 
-    void OnTriggerStay2D(Collider2D collision){
-        if (collision.gameObject.tag == "SunnySpot")
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "player")
         {
-            inSunnySpot = true;
-            PlayerEnergy.energy = Mathf.Min(PlayerEnergy.energy + (.5f * Time.deltaTime), 10.0f);
-        } else {
-            inSunnySpot = false;
+            PlayerEnergy.energy = 10;
+            SceneManager.LoadScene("Level 1");
         }
     }
 }
