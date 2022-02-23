@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
         transform.Translate(directionVector.normalized * Time.deltaTime * movementSpeed);
     }
 
-    void OnCollisionStay2D(Collision2D collision){
+    void OnTriggerStay2D(Collider2D collision){
         if (collision.gameObject.tag == "SunnySpot")
         {
             inSunnySpot = true;

@@ -11,6 +11,7 @@ public class PlayerEnergy : MonoBehaviour
     public GameObject player;
 
     public GameObject panel;
+    public static bool inSunnySpot = false;
 
 
     // Start is called before the first frame update
@@ -20,14 +21,16 @@ public class PlayerEnergy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!PlayerMovement.inSunnySpot){
+        if(!inSunnySpot){
             time = Time.deltaTime;
             //Debug.Log(time);
             if(energy>0.0f){
                 energy -= time;
                 Debug.Log(energy);
-                panel.transform.localScale = new Vector3((energy/10)*1,1,1);
             }
+        } else{
+            energy = Mathf.Min(energy + (.5f * Time.deltaTime), 10.0f);
         }
+        panel.transform.localScale = new Vector3((energy/10)*1,1,1);
     }
 }
