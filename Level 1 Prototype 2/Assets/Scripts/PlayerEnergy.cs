@@ -15,6 +15,7 @@ public class PlayerEnergy : MonoBehaviour
     public static bool inSunnySpot = false;
 
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,8 +35,9 @@ public class PlayerEnergy : MonoBehaviour
             }
             else
             {
-                energy = 10;
-                SceneManager.LoadScene("Level 1");
+                PlayerMovement.LostLevel("Ran out of Energy");
+
+                //SceneManager.LoadScene("Level 1");
             }
         }
         else

@@ -20,8 +20,9 @@ public class PlayerHit : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            PlayerEnergy.energy = 10;
-            SceneManager.LoadScene("Level 1");
+            PlayerMovement.LostLevel("Player Collided with Enemy");
+            //PlayerEnergy.energy = 10;
+            //SceneManager.LoadScene("Level 1");
         }
     }
 }

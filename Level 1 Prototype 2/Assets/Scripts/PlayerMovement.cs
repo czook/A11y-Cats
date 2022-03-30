@@ -9,11 +9,14 @@ public class PlayerMovement : MonoBehaviour
     private float verticalInput = 0;
     public int movementSpeed;
     public static bool inSunnySpot = false;
-
+    public static bool move = true;
+    public static GameObject lostScreen;
+    public static GameObject inGame;
     // Start is called before the first frame update
     void Start()
     {
-
+        lostScreen = GameObject.Find("LosingScreenCanvas");
+        inGame = GameObject.Find("InGameUICanvas");
     }
 
     private void FixedUpdate()
@@ -30,16 +33,26 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePlayer()
     {
-        Vector3 directionVector = new Vector3(horizontalInput, verticalInput, 0);
-        transform.Translate(directionVector.normalized * Time.deltaTime * movementSpeed);
+        if (move == true)
+        {
+            Vector3 directionVector = new Vector3(horizontalInput, verticalInput, 0);
+            transform.Translate(directionVector.normalized * Time.deltaTime * movementSpeed);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "player")
         {
-            PlayerEnergy.energy = 10;
-            SceneManager.LoadScene("Level 1");
+            LostLevel("PlayerTrigger");
         }
+    }
+
+    public static void LostLevel(string reason)
+    {
+        lostScreen.GetComponent<Canvas>().enabled = true;
+        inGame.GetComponent<Canvas>().enabled = false;
+        Debug.Log(reason);
+        move = false;
     }
 }
