@@ -33,7 +33,7 @@ public class PlayerEnergy : MonoBehaviour
                 energy -= time;
                 //Debug.Log(energy);
             }
-            else
+            else if (PlayerMovement.move)
             {
                 PlayerMovement.LostLevel("Ran out of Energy");
 
