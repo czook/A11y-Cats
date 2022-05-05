@@ -43,3 +43,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Skidmarks
+    uniqueID: 3230163783
+    locked: 0

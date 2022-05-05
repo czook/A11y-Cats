@@ -6,12 +6,15 @@ using UnityEngine.SceneManagement;
 
 public class LevelWin : MonoBehaviour
 {
-    public GameObject winScreen;
-    public GameObject inGame;
+    public static GameObject winScreen;
+    public static GameObject inGame;
+    public static GameObject lostScreen;
     // Start is called before the first frame update
     void Start()
     {
-
+        winScreen = GameObject.Find("WinningScreenCanvas");
+        lostScreen = GameObject.Find("LosingScreenCanvas");
+        inGame = GameObject.Find("InGameUICanvas");
     }
 
     // Update is called once per frame
@@ -25,12 +28,16 @@ public class LevelWin : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            winScreen.GetComponent<Canvas>().enabled = true;
-            inGame.GetComponent<Canvas>().enabled = false;
-            PlayerMovement.move = false;
+            LevelWinScreen();
         }
     }
 
+    public static void LevelWinScreen()
+    {
+        winScreen.GetComponent<Canvas>().enabled = true;
+        inGame.GetComponent<Canvas>().enabled = false;
+        PlayerMovement.move = false;
+    }
     public void NextLevelButton()
     {
         //gets current level name ex: "Level 5" and the 7th char 
@@ -50,5 +57,12 @@ public class LevelWin : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         PlayerMovement.move = true;
         PlayerEnergy.energy = 10;
+    }
+
+    public static void LostLevel(string reason)
+    {
+        lostScreen.GetComponent<Canvas>().enabled = true;
+        inGame.GetComponent<Canvas>().enabled = false;
+        Debug.Log(reason);
     }
 }
